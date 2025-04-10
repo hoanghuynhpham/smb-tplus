@@ -5,24 +5,24 @@ namespace Smb\Tplus;
 use Illuminate\Support\ServiceProvider;
 use Smb\Tplus\Services\QRCodeService;
 
-class QrCodeServiceProvider extends ServiceProvider
+class QRCodeServiceProvider extends ServiceProvider
 {
     /**
-     * Đăng ký binding cho service QRCode vào container.
+     * Bootstrap any application services.
      */
-    public function register(): void
+    public function boot()
     {
-        // Đăng ký service dưới alias 'qr_code_service'
-        $this->app->singleton('qr_code_service', function () {
-            return new QRCodeService();
-        });
+        // Đăng ký routes
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'qrcode');
     }
 
     /**
-     * Bootstrap bất kỳ phần nào khi package được load (nếu cần).
+     * Register any application services
      */
-    public function boot(): void
+    public function register()
     {
-        //
+        // Đăng ký bindings hoặc singletons nếu cần
     }
 }
